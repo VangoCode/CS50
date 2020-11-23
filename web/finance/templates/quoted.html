@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Get a Quote
+{% endblock %}
+
+{% block main %}
+    <H3>Stock Price: </H3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ name }}</td>
+                <td>{{ price }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <a class="btn btn-primary" href="/">Home</a>
+{% endblock %}

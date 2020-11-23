@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <h3>Transaction History</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Symbol</th>
+                <th>Owned Shares</th>
+                <th>Stock Price</th>
+                <th>Total Price</th>
+                <th>Transaction Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                    <td>{{ row["stock_name"] }}</td>
+                    <td>{{ row["stock_symbol"] }}</td>
+                    <td>{{ row["shares"] }}</td>
+                    <td>{{ row["stock_price"] }}</td>
+                    <td>{{ "$%.2f"|format(row["stock_price"] * row["shares"]) }}</td>
+                    <td>{{ row["type"] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

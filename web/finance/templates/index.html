@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <h3>Owned Stocks</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Symbol</th>
+                <th>Owned Shares</th>
+                <th>Stock Price</th>
+                <th>Purchase Price</th>
+                <th>Current Price</th>
+                <th>Profit/Loss</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+                {% if not row["stock_count"] == row["stock_sold"] %}
+                    {% set purPrice = row["stock_count"] * row["stock_purchase_price"] %}
+                    {% set curPrice = row["stock_count"] * currentPrice[loop.index-1] %}
+                    {% set pL = curPrice - purPrice %}
+                    <tr>
+                        <td>{{ row["stock_name"] }}</td>
+                        <td>{{ row["stock_symbol"] }}</td>
+                        <td>{{ row["stock_count"]-row["stock_sold"] }}</td>
+                        <td>{{ "$%.2f"|format(currentPrice[loop.index-1]) }}</td>
+                        <td>{{ "$%.2f"|format(purPrice) }}</td>
+                        <td>{{ "$%.2f"|format(purPrice) }}</td>
+                        <td>{{ "$%.2f"|format(pL) }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>Cash</td>
+                <td>{{ cash }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}
